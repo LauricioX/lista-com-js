@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    body{
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    #container{
+        width: 100%;
+        max-width: 400px;
+        padding: 10px;
+        height: 400px;
+        background-color: blueviolet;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 3px;        
+
+    }
+    #inp:focus #btn{
+    display: none;
+}
+
+    #btn{
+        background-color: rgb(5, 27, 70); width: 100px; border: none; color: white;
+    }
+    ul{
+        text-align: left;
+    }
+
+    #btn:hover{
+        background-color: rgb(85, 102, 179);
+        border: 2px solid rgb(25, 0, 54);
+
+    }
+
+    .done{
+        text-decoration: line-through;
+        color: lightgray;
+    }
+
+
+
+    li{
+        color: white;
+        font-size: 1.4rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+
+
+
+
+</style>
+<body>
+<!-- obejtivo fazer uma pequena lista de taresfas onde o usuario pode acrescentar um novo item (li) na lista (ul) através de um input em um botão .
+esta lista deve estar prencida previamente com tres itebs quaisquer .
+acrescentar eventos de click para cada li para marcar como feito. -->
+
+<div id="container">
+    <div style="display: flex; gap: 10px;">
+        <input id="inp" type="text" style="height: 30px; width: 260px; color: black; font-size: 1.1rem; "> 
+        <button id="btn" >criar</button>
+    </div>
+    
+    <ul style="text-align: left; width: 100%; padding-left:90px;">
+        <li>estudar js</li>
+        <li>estudar css</li>
+        <li>jogar video game</li>
+    </ul>
+</div>
+
+<script>
+(function(){
+
+    var ul = document.querySelector("ul");
+    var li = ul.querySelectorAll("li");
+    var inp = document.querySelector("#inp");
+    var btn = document.querySelector("#btn");
+
+    btn.addEventListener("click", add);
+    
+
+     inp.addEventListener("keyup", function(e){
+        if(e.keyCode === 13){
+            add();
+        }
+    
+         
+     });
+
+     ul.addEventListener("click", function(e){
+            if(e.target.nodeName === "LI"){
+                rmv(e.target);
+            }
+     })
+
+     function rmv(lista){
+        if( confirm("deseja realmente excluir "+ lista.textContent +" ?")){
+            lista.parentNode.removeChild(lista);
+
+        }
+     }
+
+    
+
+
+
+
+
+
+    function add(){
+        var list = document.createElement("li");
+        var texto = document.createTextNode(inp.value);
+
+
+        list.appendChild(texto);
+        ul.appendChild(list)
+
+
+
+        inp.value = "";
+        inp.focus();
+
+
+    }
+     
+  
+
+})()
+
+
+
+
+</script>
+
+    
+    
+</body>
+</html>
